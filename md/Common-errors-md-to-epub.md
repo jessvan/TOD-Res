@@ -1,21 +1,27 @@
 # Common errors md to ePub
 
 ## name of error: No rule to make target
-**translation**
-make: *** No rule to make target `md/Hybrid', needed by `epub'.  Stop.
-Translation: I’m expecting a piece of code here that you forgot, most likely some punctuation, like a semi-colon, parentheses, curly bracket, etc.
 
-This error is pretty much always caused by a typo, make sure your file has no spaces in the name.
 
-Incorrect:
+
+**Translation:** 
+Pandoc is expecting to find a file name ending in .md (markdown) but because of the space in the file name it stops.
+
+> make: *** No rule to make target `md/Hybrid', needed by `epub'.  Stop.
+
+This error is pretty much always caused by a typo - make sure your file has no spaces in the name. You can see it stopped after /Hybrid - which is the first word in the title below before a space.
+
+### Solution
+
+**Incorrect:**
 
 Hybrid Publishing Workflow.md
 
-Correct:
+**Correct:**
+
 Hybrid-Publishing-Workflow.md
 
-----
-version: InDD CC
+
 
 ## font problem: italic styles render in iBooks as bold italic
 
@@ -35,7 +41,8 @@ incorrect:
 src: Open Sans-LightItalic; format('opentype');
 }
 
-correct:
+** correct:**
+
 @font-face {
   font-family: 'OpenSans-LightItalic';
   font-style: italic;
@@ -45,28 +52,30 @@ correct:
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 
-incorrect:
+**incorrect:**
 not specifying a style for italic
 
-correct:
-em {
+**correct:**
+p.italic {
     font-family: "OpenSans-LightItalic";
     font-style: italic;
 }
 
 
-**make file**
-incorrect:
+#### make file
+**incorrect:**
+
+not having --epub-embed-font in your makefile means default fonts will be used.
 
 
-correct:
+**correct:**
 --epub-embed-font=../lib/* \
 
 
 ## command line - when using pandoc to create epubs
 
 **Translation:**
-Pandoc is a converter, 
+Pandoc is a converter, you need to first install it
 
 ### solution
 a guide to set it up & use it to recreate files
